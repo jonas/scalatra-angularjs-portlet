@@ -5,6 +5,8 @@
     <portlet>
         <portlet-name>users-list-portlet</portlet-name>		
         <instanceable>false</instanceable>        
+        <header-portlet-javascript>/components/angular/angular.min.js</header-portlet-javascript>
+        <header-portlet-javascript>/components/angular-resource/angular-resource.min.js</header-portlet-javascript>
         <footer-portlet-javascript>/js/application.js</footer-portlet-javascript>                       
     </portlet>
     <role-mapper>

@@ -3,20 +3,37 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.savoirfairelinux.liferay</groupId>
-    <artifactId>angularjs-sample-portlet</artifactId>
+    <artifactId>scalatra-angularjs-portlet</artifactId>
     <version>1.0</version>
 
     <packaging>war</packaging>
-    <name>AngularJS Sample Portlet</name>
+    <name>${project.groupId}.${project.artifactId}</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <liferay.version>6.1.1</liferay.version>
-        <spring.version>3.1.2.RELEASE</spring.version>
+        <scala.version>2.10.2</scala.version>
+        <liferay.version>6.1.2</liferay.version>
     </properties>
 
     <dependencies>
-        
+        <!-- Scalatra -->
+        <dependency>
+            <groupId>org.scalatra</groupId>
+            <artifactId>scalatra_2.10</artifactId>
+            <version>2.0.5</version>
+        </dependency>
+        <dependency>
+            <groupId>com.typesafe.play</groupId>
+            <artifactId>play-json_2.10</artifactId>
+            <version>2.2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.scala-lang</groupId>
+            <artifactId>scala-library</artifactId>
+            <version>${scala.version}</version>
+            <scope>compile</scope>
+        </dependency>
+
         <!-- Liferay -->
         <dependency>
             <groupId>com.liferay.portal</groupId>
@@ -42,7 +59,7 @@
             <version>${liferay.version}</version>
             <scope>provided</scope>
         </dependency>
-        
+
         <!-- JEE -->
         <dependency>
             <groupId>javax.portlet</groupId>
@@ -62,40 +79,6 @@
             <version>2.0</version>
             <scope>provided</scope>
         </dependency>
-        
-        <!-- Spring Framework -->        
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-beans</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        
-        <!-- Others -->
-        <dependency>
-            <groupId>org.codehaus.jackson</groupId>
-            <artifactId>jackson-mapper-asl</artifactId>
-            <version>1.7.1</version>
-        </dependency>
     </dependencies>
 
     <build>
@@ -111,6 +94,30 @@
                 </configuration>
             </plugin>
             <plugin>
+                <groupId>net.alchim31.maven</groupId>
+                <artifactId>scala-maven-plugin</artifactId>
+                <version>3.1.5</version>
+                <executions>
+                    <execution>
+                        <id>compile</id>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                        <phase>process-resources</phase>
+                    </execution>
+                    <execution>
+                        <id>test-compile</id>
+                        <goals>
+                            <goal>testCompile</goal>
+                        </goals>
+                        <phase>process-test-resources</phase>
+                    </execution>
+                </executions>
+                <configuration>
+                    <scalaVersion>${scala.version}</scalaVersion>
+                </configuration>
+            </plugin>
+            <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
                 <version>2.5</version>
                 <configuration>
@@ -120,4 +127,11 @@
         </plugins>
     </build>
 
+    <repositories>
+        <repository>
+            <id>typesafe</id>
+            <name>typesafe-releases</name>
+            <url>http://repo.typesafe.com/typesafe/maven-releases</url>
+        </repository>
+    </repositories>
 </project>

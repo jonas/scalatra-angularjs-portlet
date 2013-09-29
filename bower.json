@@ -1,0 +1,16 @@
+{
+  "name": "scalatra-angularjs-portlet",
+  "version": "1.0",
+  "homepage": "https://github.com/jonas/scalatra-angularjs-portlet",
+  "authors": [
+    "Jonas Fonseca <jonas.fonseca@savoirfairelinux.com>"
+  ],
+  "description": "Scalatra AngularJS Portlet",
+  "main": "src/main/webapp/js/application.js",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "angular": "~1.0.8",
+    "angular-resource": "~1.0.8"
+  }
+}

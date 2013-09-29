@@ -1,7 +1,10 @@
-*.class
-
-# Package Files #
-*.jar
-*.war
-*.ear
+# Build Files #
 /target/
+
+# Bower Files #
+src/main/webapp/components/**/README.md
+src/main/webapp/components/**/.bower.json
+src/main/webapp/components/**/bower.json
+
+# IDE Files #
+/nbactions.xml

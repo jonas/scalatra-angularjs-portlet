@@ -10,7 +10,7 @@
         <init-param>
             <param-name>servlet-class</param-name>
             <param-value>
-                org.springframework.web.servlet.DispatcherServlet
+                com.savoirfairelinux.liferay.portlet.controller.UserController
             </param-value>
         </init-param>
         <init-param>

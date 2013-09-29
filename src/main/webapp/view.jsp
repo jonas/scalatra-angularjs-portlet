@@ -18,6 +18,8 @@
 
 <portlet:defineObjects />
 
+<div ng-app="user-list-portlet">
+
 <input type="text" ng-model="userName"/>
 <div class="users" ng-controller="UsersListController" ng-cloak>
     <div class="user" ng-repeat="user in users |orderBy:'lastName'|filter:userName">        
@@ -26,4 +28,6 @@
         </div>
         <div class="clear"/>
     </div>
+</div>
+
 </div>
