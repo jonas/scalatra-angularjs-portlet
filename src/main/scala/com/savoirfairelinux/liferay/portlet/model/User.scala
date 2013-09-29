@@ -21,8 +21,8 @@ object User {
     User(user.getUserId(),
          user.getFirstName(),
          user.getLastName(),
-         user.getJobTitle(),
          user.getEmailAddress(),
+         user.getJobTitle(),
          user.getComments(),
          pictureUrl)
   }
