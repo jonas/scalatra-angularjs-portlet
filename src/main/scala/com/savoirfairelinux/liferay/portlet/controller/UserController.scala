@@ -8,12 +8,13 @@ import com.liferay.portal.security.permission.PermissionThreadLocal
 import com.liferay.portal.util.PortalUtil
 import com.savoirfairelinux.liferay.portlet.model.User
 import com.savoirfairelinux.liferay.portlet.service.UserService
-import play.api.libs.json.Json
+import org.json4s.{DefaultFormats, Formats}
 import org.scalatra._
+import org.scalatra.json._
 
-class UserController extends ScalatraServlet {
+class UserController extends ScalatraServlet with JacksonJsonSupport {
   val log = LogFactoryUtil.getLog(getClass())
-  implicit val userJsonWrites = Json.writes[User]
+  protected implicit val jsonFormats: Formats = DefaultFormats
   var userService: UserService = new UserService
 
   before() {
@@ -31,10 +32,10 @@ class UserController extends ScalatraServlet {
   }
 
   before("/services/users") {
-    contentType = "applcication/json"
+    contentType = formats("json")
   }
 
   get("/services/users") {
-    Json.toJson(userService.getUsers)
+    userService.getUsers
   } 
 }
