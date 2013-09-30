@@ -25,6 +25,11 @@
         </dependency>
         <dependency>
             <groupId>org.scalatra</groupId>
+            <artifactId>scalatra-auth_2.10</artifactId>
+            <version>${scalatra.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.scalatra</groupId>
             <artifactId>scalatra-json_2.10</artifactId>
             <version>${scalatra.version}</version>
         </dependency>
