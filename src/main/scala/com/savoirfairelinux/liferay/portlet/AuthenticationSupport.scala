@@ -1,4 +1,4 @@
-package com.savoirfairelinux.liferay.portlet.controller
+package com.savoirfairelinux.liferay.portlet
 
 import com.liferay.portal.security.auth.CompanyThreadLocal
 import com.liferay.portal.security.auth.PrincipalThreadLocal

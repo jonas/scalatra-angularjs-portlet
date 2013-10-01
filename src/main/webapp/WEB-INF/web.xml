@@ -10,7 +10,7 @@
         <init-param>
             <param-name>servlet-class</param-name>
             <param-value>
-                com.savoirfairelinux.liferay.portlet.controller.UserController
+                com.savoirfairelinux.liferay.portlet.MainServlet
             </param-value>
         </init-param>
         <init-param>
