@@ -7,6 +7,8 @@ class MainServlet extends ScalatraServlet
                      with AuthenticationSupport
                      with UserController {
 
+  def bindingModule = ProjectConfiguration
+
   before() {
     scentry.authenticate('LiferayAuth)
   }

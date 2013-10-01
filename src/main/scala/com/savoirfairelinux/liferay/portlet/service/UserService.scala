@@ -9,7 +9,11 @@ import collection.JavaConversions._
 /**
  * @author Dmitri Carpov
  */
-class UserService {
+trait UserService {
+  def getUsers: List[User]
+}
+
+class LiferayUserService extends UserService {
     def getUsers: List[User] = {
       val companyId = CompanyThreadLocal.getCompanyId()
       val users = UserServiceUtil.getCompanyUsers(companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS)
