@@ -1,5 +1,6 @@
 package com.savoirfairelinux.liferay.portlet
 
+import com.escalatesoft.subcut.inject.Injectable
 import com.liferay.portal.security.auth.CompanyThreadLocal
 import com.liferay.portal.security.auth.PrincipalThreadLocal
 import com.liferay.portal.security.permission.PermissionCheckerFactoryUtil
@@ -13,7 +14,9 @@ import scala.util.Try
 
 case class LiferayAuthUser(id: String)
 
-class LiferayAuthStrategy(protected val app: ScalatraBase) extends ScentryStrategy[LiferayAuthUser] {
+trait LiferayAuthStrategy extends ScentryStrategy[LiferayAuthUser]
+
+class PermissionCheckerAuthStrategy(protected val app: ScalatraBase) extends LiferayAuthStrategy {
 
   def authenticate()(implicit request: HttpServletRequest, response: HttpServletResponse) = {
     def findUserAndSetupPermissions = {
@@ -32,15 +35,16 @@ class LiferayAuthStrategy(protected val app: ScalatraBase) extends ScentryStrate
 
 }
 
-trait AuthenticationSupport extends ScentrySupport[LiferayAuthUser] { self: ScalatraBase =>
-  
+trait AuthenticationSupport extends ScentrySupport[LiferayAuthUser] with Injectable { self: ScalatraBase =>
+
   protected def fromSession = { case id: String => LiferayAuthUser(id)  }
   protected def toSession   = { case usr: LiferayAuthUser => usr.id }
 
   override protected def registerAuthStrategies = {
-    scentry.register("LiferayAuth", app => new LiferayAuthStrategy(app))
+    scentry.register("LiferayAuth", app =>
+        injectOptional [LiferayAuthStrategy] getOrElse { new PermissionCheckerAuthStrategy(app) })
   }
-
+                     
   override protected val scentryConfig = new ScentryConfig {
     override val login = "/c/portal/login"
     override val returnTo = "/"
