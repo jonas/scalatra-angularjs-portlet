@@ -10,7 +10,7 @@ class MainServlet extends ScalatraServlet
   def bindingModule = ProjectConfiguration
 
   before() {
-    scentry.authenticate('LiferayAuth)
+    scentry.authenticate("LiferayAuth")
   }
 
 }
