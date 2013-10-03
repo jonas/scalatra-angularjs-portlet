@@ -14,10 +14,10 @@ trait UserService {
 }
 
 class LiferayUserService extends UserService {
-    def getUsers: List[User] = {
-      val companyId = CompanyThreadLocal.getCompanyId()
-      val users = UserServiceUtil.getCompanyUsers(companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS)
+  def getUsers: List[User] = {
+    val companyId = CompanyThreadLocal.getCompanyId()
+    val users = UserServiceUtil.getCompanyUsers(companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS)
 
-      users.map(User.toUser(_)).toList
-    }
+    users.map(User.toUser(_)).toList
+  }
 }

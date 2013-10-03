@@ -42,7 +42,7 @@ trait AuthenticationSupport extends ScentrySupport[LiferayAuthUser] with Injecta
 
   override protected def registerAuthStrategies = {
     scentry.register("LiferayAuth", app =>
-        injectOptional [LiferayAuthStrategy] getOrElse { new PermissionCheckerAuthStrategy(app) })
+      injectOptional [LiferayAuthStrategy] getOrElse { new PermissionCheckerAuthStrategy(app) })
   }
                      
   override protected val scentryConfig = new ScentryConfig {
