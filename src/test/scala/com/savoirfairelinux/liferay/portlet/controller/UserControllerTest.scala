@@ -5,17 +5,30 @@ import org.json4s.jackson.JsonMethods._
 import org.scalatest.FunSuite
 import org.scalatra.ScalatraServlet
 import org.scalatra.test.scalatest.ScalatraSuite
-import com.savoirfairelinux.liferay.portlet.TestConfiguration
+import com.escalatesoft.subcut.inject.NewBindingModule
 import com.savoirfairelinux.liferay.portlet.model.User
+import com.savoirfairelinux.liferay.portlet.service.UserService
 
-class UserControllerServlet extends ScalatraServlet with UserController {
-  def bindingModule = TestConfiguration
+class UserControllerTestServlet extends ScalatraServlet with UserController {
+  def bindingModule = new NewBindingModule(module => {
+    import module._
+
+    bind [UserService] toSingle new UserService {
+      def getUsers: List[User] = {
+        User(0, "Dmitri", "Carpov", "dmitri.carpov@example.com",
+             "Free Software Consultant", "", "http://example.com/img/dcarpov.png") ::
+        User(1, "Jonas", "Fonseca", "jonas.fonseca@example.com",
+             "Free Software Consultant", "", "http://example.com/img/jfonseca.png") ::
+        Nil
+      }
+    }
+  })
 }
 
 class UserControllerTest extends ScalatraSuite with FunSuite {
 
   protected implicit val jsonFormats: Formats = DefaultFormats
-  addServlet(classOf[UserControllerServlet], "/*")
+  addServlet(classOf[UserControllerTestServlet], "/*")
 
   test("/service/users returns two users") {
     get("/services/users") {
